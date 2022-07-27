@@ -3,6 +3,6 @@ import ReactDOM from 'react-dom/client';
 
 export default function General() {
     return (
-        <div>Genreral</div>
+        <div>General</div>
     );
 }
