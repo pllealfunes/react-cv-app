@@ -9,7 +9,7 @@ export default function Experience() {
         date: ""
     });
 
-    console.log(exFormData);
+    // console.log(exFormData);
 
     function handleChange(event) {
         setExFormData(prevFormData => {

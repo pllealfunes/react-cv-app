@@ -1,14 +1,10 @@
 import './App.css';
-import General from './components/General';
-import Education from './components/Education';
-import Experience from './components/Experience';
+import Form from './components/Form';
 
 function App() {
   return (
     <div className="App">
-      <General />
-      <Education />
-      <Experience />
+      <Form />
     </div>
   );
 }

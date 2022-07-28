@@ -1,12 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import Form from './Form';
 
-export default function General() {
-
-    const [genFormData, setGenFormData] = React.useState({
+export default function General(props) {
+    //console.log(props)
+    /*const [genFormData, setGenFormData] = React.useState({
         fullName: "",
         email: "",
-        phone: ""
+        phone: "",
+        schoolName: "",
+        degree: "",
+        date: "",
+        companyName: "",
+        title: "",
+        description: "",
+        date: ""
     });
 
     console.log(genFormData);
@@ -20,32 +28,13 @@ export default function General() {
         });
     }
 
+    function handleSubmit(event) {
+        event.preventDefault();
+    }*/
+
     return (
         <div className='geninfo-container'>
-            <h1>General Information</h1>
-            <form className='genInfoForm'>
-                <input
-                    type='text'
-                    name='fullName'
-                    placeholder='Full Name'
-                    onChange={handleChange}
-                    value={genFormData.fullName}
-                />
-                <input
-                    type='email'
-                    name='email'
-                    placeholder='Email'
-                    onChange={handleChange}
-                    value={genFormData.email}
-                />
-                <input
-                    type='tel'
-                    name='phone'
-                    placeholder='Phone Number'
-                    onChange={handleChange}
-                    value={genFormData.phone}
-                />
-            </form>
+            {props.degree}
         </div>
     );
 }

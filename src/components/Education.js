@@ -8,7 +8,7 @@ export default function Education() {
         date: ""
     });
 
-    console.log(edFormData);
+    //console.log(edFormData);
 
     function handleChange(event) {
         setEdFormData(prevFormData => {
