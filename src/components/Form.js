@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import General from './General';
+import Results from './Results';
 
 export default function Form() {
 
@@ -28,10 +28,13 @@ export default function Form() {
         });
     }
 
+
     function handleSubmit(event) {
         event.preventDefault();
-        setSubmitForm(true);
+        console.log(formData)
+        setSubmitForm(!isSubmitted)
     }
+
 
     return (
         <div className='form-container'>
@@ -108,7 +111,7 @@ export default function Form() {
                 />
                 <button>Submit</button>
             </form>
-            {isSubmitted && < General {...formData} />}
+            {isSubmitted && < Results {...formData} />}
         </div>
     );
 }
