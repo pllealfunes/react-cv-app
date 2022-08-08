@@ -16,7 +16,7 @@ export default function Form() {
         description: "",
         date: ""
     });
-
+    const [results, setResults] = React.useState("")
     const [isSubmitted, setSubmitForm] = React.useState(false);
 
     function handleChange(event) {
@@ -29,10 +29,12 @@ export default function Form() {
     }
 
 
+
     function handleSubmit(event) {
         event.preventDefault();
-        console.log(formData)
-        setSubmitForm(!isSubmitted)
+        setResults(formData);
+        setSubmitForm(true)
+
     }
 
 
@@ -111,7 +113,7 @@ export default function Form() {
                 />
                 <button>Submit</button>
             </form>
-            {isSubmitted && < Results {...formData} />}
+            {isSubmitted && < Results {...results} />}
         </div>
     );
 }
