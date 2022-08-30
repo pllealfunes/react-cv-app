@@ -33,9 +33,28 @@ export default function Form() {
     function handleSubmit(event) {
         event.preventDefault();
         setResults(formData);
-        setSubmitForm(true)
-
+        setSubmitForm(true);
+        setFormData(() => {
+            return {
+                fullName: "",
+                email: "",
+                phone: "",
+                schoolName: "",
+                degree: "",
+                gradDate: "",
+                companyName: "",
+                title: "",
+                description: "",
+                date: ""
+            }
+        });
     }
+
+
+    function editResume() {
+        setFormData(results);
+    }
+
 
 
     return (
