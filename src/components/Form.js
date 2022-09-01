@@ -18,6 +18,7 @@ export default function Form() {
     });
     const [results, setResults] = React.useState("")
     const [isSubmitted, setSubmitForm] = React.useState(false);
+    const [disable, setDisable] = React.useState(false);
 
     function handleChange(event) {
         setFormData(prevFormData => {
@@ -48,11 +49,13 @@ export default function Form() {
                 date: ""
             }
         });
+        setDisable(false);
     }
 
 
-    function editResume() {
+    function editResume(e) {
         setFormData(results);
+        setDisable(true);
     }
 
 
@@ -132,7 +135,7 @@ export default function Form() {
                 />
                 <button>Submit</button>
             </form>
-            {isSubmitted && < Results {...results} />}
+            {isSubmitted && < Results {...results} editResume={editResume} disable={disable} />}
         </div>
     );
 }
