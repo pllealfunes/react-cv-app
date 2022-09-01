@@ -13,8 +13,8 @@ export default function Form() {
         gradDate: "",
         companyName: "",
         title: "",
-        description: "",
-        date: ""
+        dateWorked: "",
+        description: ""
     });
     const [results, setResults] = React.useState("")
     const [isSubmitted, setSubmitForm] = React.useState(false);
@@ -35,6 +35,7 @@ export default function Form() {
         event.preventDefault();
         setResults(formData);
         setSubmitForm(true);
+        setDisable(false);
         setFormData(() => {
             return {
                 fullName: "",
@@ -46,10 +47,9 @@ export default function Form() {
                 companyName: "",
                 title: "",
                 description: "",
-                date: ""
+                dateWorked: ""
             }
         });
-        setDisable(false);
     }
 
 
@@ -61,79 +61,87 @@ export default function Form() {
 
 
     return (
-        <div className='form-container'>
-            <h1>General Information</h1>
+        <div className='formContainer'>
             <form onSubmit={handleSubmit}>
-                <input
-                    type='text'
-                    name='fullName'
-                    placeholder='Full Name'
-                    onChange={handleChange}
-                    value={formData.fullName}
-                />
-                <input
-                    type='text'
-                    name='email'
-                    placeholder='Email'
-                    onChange={handleChange}
-                    value={formData.email}
-                />
-                <input
-                    type='tel'
-                    name='phone'
-                    placeholder='Phone Number'
-                    onChange={handleChange}
-                    value={formData.phone}
-                />
-                <input
-                    type='text'
-                    name='schoolName'
-                    placeholder='School Name'
-                    onChange={handleChange}
-                    value={formData.schoolName}
-                />
-                <input
-                    type='text'
-                    name='degree'
-                    placeholder='Title of Study'
-                    onChange={handleChange}
-                    value={formData.degree}
-                />
-                <input
-                    type='text'
-                    name='gradDate'
-                    placeholder='Date of Study'
-                    onChange={handleChange}
-                    value={formData.gradDate}
-                />
-                <input
-                    type='text'
-                    name='companyName'
-                    placeholder='Company Name'
-                    onChange={handleChange}
-                    value={formData.companyName}
-                />
-                <input
-                    type='text'
-                    name='title'
-                    placeholder='Position Title'
-                    onChange={handleChange}
-                    value={formData.title}
-                />
-                <input
-                    type='text'
-                    name='date'
-                    placeholder='Time of Work'
-                    onChange={handleChange}
-                    value={formData.date}
-                />
-                <textarea
-                    name="description"
-                    placeholder='Description'
-                    onChange={handleChange}
-                    value={formData.description}
-                />
-                <button>Submit</button>
+                <div className='genInfo'>
+                    <h2>General Information</h2>
+                    <input
+                        type='text'
+                        name='fullName'
+                        placeholder='Full Name'
+                        onChange={handleChange}
+                        value={formData.fullName}
+                    />
+                    <input
+                        type='text'
+                        name='email'
+                        placeholder='Email'
+                        onChange={handleChange}
+                        value={formData.email}
+                    />
+                    <input
+                        type='tel'
+                        name='phone'
+                        placeholder='Phone Number'
+                        onChange={handleChange}
+                        value={formData.phone}
+                    />
+                </div>
+                <div className='edInfo'>
+                    <h2>Educational Experience</h2>
+                    <input
+                        type='text'
+                        name='schoolName'
+                        placeholder='School Name'
+                        onChange={handleChange}
+                        value={formData.schoolName}
+                    />
+                    <input
+                        type='text'
+                        name='degree'
+                        placeholder='Title of Study'
+                        onChange={handleChange}
+                        value={formData.degree}
+                    />
+                    <input
+                        type='text'
+                        name='gradDate'
+                        placeholder='Date of Study'
+                        onChange={handleChange}
+                        value={formData.gradDate}
+                    />
+                </div>
+                <div className='pacInfo'>
+                    <h2>Practical Experience</h2>
+                    <input
+                        type='text'
+                        name='companyName'
+                        placeholder='Company Name'
+                        onChange={handleChange}
+                        value={formData.companyName}
+                    />
+                    <input
+                        type='text'
+                        name='title'
+                        placeholder='Position Title'
+                        onChange={handleChange}
+                        value={formData.title}
+                    />
+                    <input
+                        type='text'
+                        name='dateWorked'
+                        placeholder='Time of Work'
+                        onChange={handleChange}
+                        value={formData.dateWorked}
+                    />
+                    <textarea
+                        name="description"
+                        placeholder='Description'
+                        onChange={handleChange}
+                        value={formData.description}
+                    />
+                </div>
+                <button className='submitBtn'>Submit</button>
             </form>
             {isSubmitted && < Results {...results} editResume={editResume} disable={disable} />}
         </div>
