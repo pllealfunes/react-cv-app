@@ -33,7 +33,7 @@ export default function Results(props) {
                     <b>Company Name:</b> {props.companyName}
                 </div>
                 <div>
-                    <b>Pposition Title:</b> {props.title}
+                    <b>Position Title:</b> {props.title}
                 </div>
                 <div>
                     <b>Date Worked</b> {props.dateWorked}
@@ -41,7 +41,7 @@ export default function Results(props) {
                 <div className='descriptionResults'>
                     <b>Description:</b> {props.description}
                 </div>
-                <button onClick={props.editResume} disabled={props.disable}>Edit</button>
+                <button onClick={props.editResume} disabled={props.disableEditBtn}>Edit</button>
             </div>
 
         </div>
