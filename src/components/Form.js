@@ -16,6 +16,11 @@ export default function Form() {
         dateWorked: "",
         description: ""
     });
+    const [educationData, setEdData] = React.useState([{
+        schoolName: "",
+        degree: "",
+        gradDate: ""
+    }]);
     const [results, setResults] = React.useState("")
     const [isSubmitted, setSubmitForm] = React.useState(false);
     const [disableEdit, setDisableEdit] = React.useState(false);
@@ -61,6 +66,27 @@ export default function Form() {
         setDisableSubmit(false);
     }
 
+    const handleAddEd = () => {
+        const newEdInput = {
+            schoolName: "",
+            degree: "",
+            gradDate: ""
+        };
+        setEdData([...educationData, newEdInput]);
+    };
+
+    const handleRemoveEd = (index) => {
+        const educationEntry = [...educationData];
+        educationEntry.splice(index, 1);
+        setEdData(educationEntry);
+    };
+
+    const handleEdChange = (index, event) => {
+        const data = [...educationData];
+        data[index][event.target.name] = event.target.value;
+        setEdData(data);
+    };
+
 
 
     return (
@@ -92,27 +118,36 @@ export default function Form() {
                 </div>
                 <div className='edInfo'>
                     <h2>Educational Experience</h2>
-                    <input
-                        type='text'
-                        name='schoolName'
-                        placeholder='School Name'
-                        onChange={handleChange}
-                        value={formData.schoolName}
-                    />
-                    <input
-                        type='text'
-                        name='degree'
-                        placeholder='Title of Study'
-                        onChange={handleChange}
-                        value={formData.degree}
-                    />
-                    <input
-                        type='text'
-                        name='gradDate'
-                        placeholder='Date of Study'
-                        onChange={handleChange}
-                        value={formData.gradDate}
-                    />
+                    {educationData.map((input, index) => {
+                        return (
+                            <div key={index}>
+                                <input
+                                    type='text'
+                                    name='schoolName'
+                                    placeholder='School Name'
+                                    onChange={event => handleEdChange(index, event)}
+                                    value={input.schoolName}
+                                />
+                                <input
+                                    type='text'
+                                    name='degree'
+                                    placeholder='Title of Study'
+                                    onChange={event => handleEdChange(index, event)}
+                                    value={input.degree}
+                                />
+                                <input
+                                    type='text'
+                                    name='gradDate'
+                                    placeholder='Date of Study'
+                                    onChange={event => handleEdChange(index, event)}
+                                    value={input.gradDate}
+                                />
+                                <button onClick={() => handleRemoveEd(index)}>Remove</button>
+                            </div>
+                        )
+                    })}
+                    <button onClick={handleAddEd}>Add More..</button>
+
                 </div>
                 <div className='pacInfo'>
                     <h2>Practical Experience</h2>
