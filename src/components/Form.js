@@ -142,11 +142,11 @@ export default function Form() {
                                     onChange={event => handleEdChange(index, event)}
                                     value={input.gradDate}
                                 />
-                                <button onClick={() => handleRemoveEd(index)}>Remove</button>
+                                <button type='button' onClick={() => handleRemoveEd(index)}>Remove</button>
                             </div>
                         )
                     })}
-                    <button onClick={handleAddEd}>Add More..</button>
+                    <button type='button' onClick={handleAddEd}>Add More..</button>
 
                 </div>
                 <div className='pacInfo'>
