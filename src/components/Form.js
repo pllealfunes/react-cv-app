@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import Results from './Results';
 
 export default function Form() {
+    let btnId = [1, 2, 3, 4];
 
     const [formData, setFormData] = React.useState({
         fullName: "",
@@ -20,6 +21,12 @@ export default function Form() {
         schoolName: "",
         degree: "",
         gradDate: ""
+    }]);
+    const [paData, setPaData] = React.useState([{
+        companyName: "",
+        title: "",
+        dateWorked: "",
+        description: ""
     }]);
     const [results, setResults] = React.useState("")
     const [isSubmitted, setSubmitForm] = React.useState(false);
@@ -66,25 +73,48 @@ export default function Form() {
         setDisableSubmit(false);
     }
 
-    const handleAddEd = () => {
-        const newEdInput = {
-            schoolName: "",
-            degree: "",
-            gradDate: ""
-        };
-        setEdData([...educationData, newEdInput]);
+    const handleAddEd = (id) => {
+        if (id == 2) {
+            const newEdInput = {
+                schoolName: "",
+                degree: "",
+                gradDate: ""
+            };
+            setEdData([...educationData, newEdInput]);
+        } else if (id == 4) {
+            const newPaInput = {
+                companyName: "",
+                title: "",
+                dateWorked: "",
+                description: ""
+            };
+            setPaData([...paData, newPaInput]);
+        }
     };
 
-    const handleRemoveEd = (index) => {
-        const educationEntry = [...educationData];
-        educationEntry.splice(index, 1);
-        setEdData(educationEntry);
+    const handleRemoveEd = (index, id) => {
+        if (id == 1) {
+            const educationEntry = [...educationData];
+            educationEntry.splice(index, 1);
+            setEdData(educationEntry);
+        }
+        else if (id == 3) {
+            const paEntry = [...paData];
+            paEntry.splice(index, 1);
+            setPaData(paEntry);
+        }
     };
 
     const handleEdChange = (index, event) => {
         const data = [...educationData];
         data[index][event.target.name] = event.target.value;
         setEdData(data);
+    };
+
+    const handlePaChange = (index, event) => {
+        const data = [...paData];
+        data[index][event.target.name] = event.target.value;
+        setPaData(data);
     };
 
 
@@ -142,42 +172,50 @@ export default function Form() {
                                     onChange={event => handleEdChange(index, event)}
                                     value={input.gradDate}
                                 />
-                                <button type='button' onClick={() => handleRemoveEd(index)}>Remove</button>
+                                <button type='button' onClick={() => handleRemoveEd(index, btnId[0])}>Remove</button>
                             </div>
                         )
                     })}
-                    <button type='button' onClick={handleAddEd}>Add More..</button>
+                    <button type='button' onClick={() => handleAddEd(btnId[1])}>Add More..</button>
 
                 </div>
                 <div className='pacInfo'>
                     <h2>Practical Experience</h2>
-                    <input
-                        type='text'
-                        name='companyName'
-                        placeholder='Company Name'
-                        onChange={handleChange}
-                        value={formData.companyName}
-                    />
-                    <input
-                        type='text'
-                        name='title'
-                        placeholder='Position Title'
-                        onChange={handleChange}
-                        value={formData.title}
-                    />
-                    <input
-                        type='text'
-                        name='dateWorked'
-                        placeholder='Time of Work'
-                        onChange={handleChange}
-                        value={formData.dateWorked}
-                    />
-                    <textarea
-                        name="description"
-                        placeholder='Description'
-                        onChange={handleChange}
-                        value={formData.description}
-                    />
+                    {paData.map((input, index) => {
+                        return (
+                            <div key={index}>
+                                <input
+                                    type='text'
+                                    name='companyName'
+                                    placeholder='Company Name'
+                                    onChange={event => handlePaChange(index, event)}
+                                    value={input.companyName}
+                                />
+                                <input
+                                    type='text'
+                                    name='title'
+                                    placeholder='Position Title'
+                                    onChange={event => handlePaChange(index, event)}
+                                    value={input.title}
+                                />
+                                <input
+                                    type='text'
+                                    name='dateWorked'
+                                    placeholder='Time of Work'
+                                    onChange={event => handlePaChange(index, event)}
+                                    value={input.dateWorked}
+                                />
+                                <textarea
+                                    name="description"
+                                    placeholder='Description'
+                                    onChange={event => handlePaChange(index, event)}
+                                    value={input.description}
+                                />
+                                <button type='button' onClick={() => handleRemoveEd(index, btnId[2])}>Remove</button>
+                            </div>
+                        )
+                    })}
+                    <button type='button' onClick={() => handleAddEd(btnId[3])}>Add More..</button>
                 </div>
                 <button className='submitBtn' disabled={disableSubmit}>Submit</button>
             </form>
