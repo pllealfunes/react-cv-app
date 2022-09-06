@@ -5,17 +5,10 @@ import Results from './Results';
 export default function Form() {
     let btnId = [1, 2, 3, 4];
 
-    const [formData, setFormData] = React.useState({
+    const [genData, setGenData] = React.useState({
         fullName: "",
         email: "",
-        phone: "",
-        schoolName: "",
-        degree: "",
-        gradDate: "",
-        companyName: "",
-        title: "",
-        dateWorked: "",
-        description: ""
+        phone: ""
     });
     const [educationData, setEdData] = React.useState([{
         schoolName: "",
@@ -33,8 +26,8 @@ export default function Form() {
     const [disableEdit, setDisableEdit] = React.useState(false);
     const [disableSubmit, setDisableSubmit] = React.useState(false);
 
-    function handleChange(event) {
-        setFormData(prevFormData => {
+    function handleGenChange(event) {
+        setGenData(prevFormData => {
             return {
                 ...prevFormData,
                 [event.target.name]: event.target.value
@@ -42,36 +35,18 @@ export default function Form() {
         });
     }
 
+    const handleEdChange = (index, event) => {
+        const data = [...educationData];
+        data[index][event.target.name] = event.target.value;
+        setEdData(data);
+    };
 
 
-    function handleSubmit(event) {
-        event.preventDefault();
-        setResults(formData);
-        setSubmitForm(true);
-        setDisableEdit(false);
-        setDisableSubmit(true);
-        setFormData(() => {
-            return {
-                fullName: "",
-                email: "",
-                phone: "",
-                schoolName: "",
-                degree: "",
-                gradDate: "",
-                companyName: "",
-                title: "",
-                description: "",
-                dateWorked: ""
-            }
-        });
-    }
-
-
-    function editResume(e) {
-        setFormData(results);
-        setDisableEdit(true);
-        setDisableSubmit(false);
-    }
+    const handlePaChange = (index, event) => {
+        const data = [...paData];
+        data[index][event.target.name] = event.target.value;
+        setPaData(data);
+    };
 
     const handleAddEd = (id) => {
         if (id == 2) {
@@ -105,18 +80,44 @@ export default function Form() {
         }
     };
 
-    const handleEdChange = (index, event) => {
-        const data = [...educationData];
-        data[index][event.target.name] = event.target.value;
-        setEdData(data);
-    };
 
-    const handlePaChange = (index, event) => {
-        const data = [...paData];
-        data[index][event.target.name] = event.target.value;
-        setPaData(data);
-    };
 
+    function handleSubmit(event) {
+        event.preventDefault();
+        setResults([genData, educationData, paData]);
+        setSubmitForm(true);
+        setDisableEdit(false);
+        setDisableSubmit(true);
+        setGenData(() => {
+            return {
+                fullName: "",
+                email: "",
+                phone: ""
+            }
+        });
+        setEdData(() => {
+            return {
+                schoolName: "",
+                degree: "",
+                gradDate: ""
+            }
+        });
+        setPaData(() => {
+            return {
+                companyName: "",
+                title: "",
+                dateWorked: "",
+                description: ""
+            }
+        });
+    }
+
+
+    function editResume(e) {
+        setGenData(results);
+        setDisableEdit(true);
+        setDisableSubmit(false);
+    }
 
 
     return (
@@ -128,22 +129,22 @@ export default function Form() {
                         type='text'
                         name='fullName'
                         placeholder='Full Name'
-                        onChange={handleChange}
-                        value={formData.fullName}
+                        onChange={handleGenChange}
+                        value={genData.fullName}
                     />
                     <input
                         type='text'
                         name='email'
                         placeholder='Email'
-                        onChange={handleChange}
-                        value={formData.email}
+                        onChange={handleGenChange}
+                        value={genData.email}
                     />
                     <input
                         type='tel'
                         name='phone'
                         placeholder='Phone Number'
-                        onChange={handleChange}
-                        value={formData.phone}
+                        onChange={handleGenChange}
+                        value={genData.phone}
                     />
                 </div>
                 <div className='edInfo'>
