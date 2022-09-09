@@ -84,7 +84,7 @@ export default function Form() {
 
     function handleSubmit(event) {
         event.preventDefault();
-        setResults([genData, educationData, paData]);
+        setResults(genData, educationData, paData);
         setSubmitForm(true);
         setDisableEdit(false);
         setDisableSubmit(true);
@@ -96,22 +96,22 @@ export default function Form() {
             }
         });
         setEdData(() => {
-            return {
+            return [{
                 schoolName: "",
                 degree: "",
                 gradDate: ""
-            }
+            }]
         });
         setPaData(() => {
-            return {
+            return [{
                 companyName: "",
                 title: "",
                 dateWorked: "",
                 description: ""
-            }
+            }]
         });
-    }
 
+    }
 
     function editResume(e) {
         setGenData(results);
@@ -220,7 +220,7 @@ export default function Form() {
                 </div>
                 <button className='submitBtn' disabled={disableSubmit}>Submit</button>
             </form>
-            {isSubmitted && < Results {...results} editResume={editResume} disableEditBtn={disableEdit} />}
+            {isSubmitted && < Results results={results} editResume={editResume} disableEditBtn={disableEdit} />}
         </div>
     );
 }
