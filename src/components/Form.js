@@ -84,7 +84,11 @@ export default function Form() {
 
     function handleSubmit(event) {
         event.preventDefault();
-        setResults(genData, educationData, paData);
+        setResults({
+            basic: genData,
+            academic: educationData,
+            experience: paData
+        });
         setSubmitForm(true);
         setDisableEdit(false);
         setDisableSubmit(true);
@@ -114,7 +118,7 @@ export default function Form() {
     }
 
     function editResume(e) {
-        setGenData(results);
+        //setGenData(results);
         setDisableEdit(true);
         setDisableSubmit(false);
     }
