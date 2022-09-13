@@ -139,9 +139,9 @@ export default function Form() {
             setEdData(educationEntry);
         }
         else if (id == 3) {
-            const paEntry = [...exData];
-            paEntry.splice(index, 1);
-            setExData(paEntry);
+            const exEntry = [...exData];
+            exEntry.splice(index, 1);
+            setExData(exEntry);
         }
     };
 
