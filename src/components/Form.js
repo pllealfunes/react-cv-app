@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import Results from './Results';
 
 export default function Form() {
+
     let btnId = [1, 2, 3, 4];
 
     const [genData, setGenData] = React.useState({
@@ -10,23 +11,15 @@ export default function Form() {
         email: "",
         phone: ""
     });
-    const [educationData, setEdData] = React.useState([{
-        schoolName: "",
-        degree: "",
-        gradDate: ""
-    }]);
-    const [paData, setPaData] = React.useState([{
-        companyName: "",
-        title: "",
-        dateWorked: "",
-        description: ""
-    }]);
+
+    const [educationData, setEdData] = React.useState([]);
+    const [exData, setExData] = React.useState([]);
     const [results, setResults] = React.useState("")
     const [isSubmitted, setSubmitForm] = React.useState(false);
     const [disableEdit, setDisableEdit] = React.useState(false);
     const [disableSubmit, setDisableSubmit] = React.useState(false);
 
-    function handleGenChange(event) {
+    const handleGenChange = (event) => {
         setGenData(prevFormData => {
             return {
                 ...prevFormData,
@@ -43,12 +36,12 @@ export default function Form() {
 
 
     const handlePaChange = (index, event) => {
-        const data = [...paData];
+        const data = [...exData];
         data[index][event.target.name] = event.target.value;
-        setPaData(data);
+        setExData(data);
     };
 
-    const handleAddEd = (id) => {
+    const handleAddEntry = (id) => {
         if (id == 2) {
             const newEdInput = {
                 schoolName: "",
@@ -63,9 +56,81 @@ export default function Form() {
                 dateWorked: "",
                 description: ""
             };
-            setPaData([...paData, newPaInput]);
+            setExData([...exData, newPaInput]);
         }
     };
+
+    const edRead = () => {
+        if (educationData.length != 0) {
+            return educationData.map((input, index) => {
+                return (
+                    <div key={index}>
+                        <input
+                            type='text'
+                            name='schoolName'
+                            placeholder='School Name'
+                            onChange={event => handleEdChange(index, event)}
+                            value={input.schoolName}
+                        />
+                        <input
+                            type='text'
+                            name='degree'
+                            placeholder='Title of Study'
+                            onChange={event => handleEdChange(index, event)}
+                            value={input.degree}
+                        />
+                        <input
+                            type='text'
+                            name='gradDate'
+                            placeholder='Date of Study'
+                            onChange={event => handleEdChange(index, event)}
+                            value={input.gradDate}
+                        />
+                        <button type='button' onClick={() => handleRemoveEd(index, btnId[0])}>Remove</button>
+                    </div>
+                )
+            })
+        }
+    }
+
+    const exRead = () => {
+        if (exData.length != 0) {
+            return exData.map((input, index) => {
+                return (
+                    <div key={index}>
+                        <input
+                            type='text'
+                            name='companyName'
+                            placeholder='Company Name'
+                            onChange={event => handlePaChange(index, event)}
+                            value={input.companyName}
+                        />
+                        <input
+                            type='text'
+                            name='title'
+                            placeholder='Position Title'
+                            onChange={event => handlePaChange(index, event)}
+                            value={input.title}
+                        />
+                        <input
+                            type='text'
+                            name='dateWorked'
+                            placeholder='Time of Work'
+                            onChange={event => handlePaChange(index, event)}
+                            value={input.dateWorked}
+                        />
+                        <textarea
+                            name="description"
+                            placeholder='Description'
+                            onChange={event => handlePaChange(index, event)}
+                            value={input.description}
+                        />
+                        <button type='button' onClick={() => handleRemoveEd(index, btnId[2])}>Remove</button>
+                    </div>
+                )
+            })
+        }
+    }
 
     const handleRemoveEd = (index, id) => {
         if (id == 1) {
@@ -74,20 +139,20 @@ export default function Form() {
             setEdData(educationEntry);
         }
         else if (id == 3) {
-            const paEntry = [...paData];
+            const paEntry = [...exData];
             paEntry.splice(index, 1);
-            setPaData(paEntry);
+            setExData(paEntry);
         }
     };
 
 
 
-    function handleSubmit(event) {
+    const handleSubmit = (event) => {
         event.preventDefault();
         setResults({
             basic: genData,
             academic: educationData,
-            experience: paData
+            experience: exData
         });
         setSubmitForm(true);
         setDisableEdit(false);
@@ -106,7 +171,7 @@ export default function Form() {
                 gradDate: ""
             }]
         });
-        setPaData(() => {
+        setExData(() => {
             return [{
                 companyName: "",
                 title: "",
@@ -117,10 +182,10 @@ export default function Form() {
 
     }
 
-    function editResume(e) {
+    const editResume = (e) => {
         setGenData(results.basic);
         setEdData(results.academic);
-        setPaData(results.experience);
+        setExData(results.experience);
         setDisableEdit(true);
         setDisableSubmit(false);
     }
@@ -155,74 +220,14 @@ export default function Form() {
                 </div>
                 <div className='edInfo'>
                     <h2>Educational Experience</h2>
-                    {educationData.map((input, index) => {
-                        return (
-                            <div key={index}>
-                                <input
-                                    type='text'
-                                    name='schoolName'
-                                    placeholder='School Name'
-                                    onChange={event => handleEdChange(index, event)}
-                                    value={input.schoolName}
-                                />
-                                <input
-                                    type='text'
-                                    name='degree'
-                                    placeholder='Title of Study'
-                                    onChange={event => handleEdChange(index, event)}
-                                    value={input.degree}
-                                />
-                                <input
-                                    type='text'
-                                    name='gradDate'
-                                    placeholder='Date of Study'
-                                    onChange={event => handleEdChange(index, event)}
-                                    value={input.gradDate}
-                                />
-                                <button type='button' onClick={() => handleRemoveEd(index, btnId[0])}>Remove</button>
-                            </div>
-                        )
-                    })}
-                    <button type='button' onClick={() => handleAddEd(btnId[1])}>Add More..</button>
+                    {edRead()}
+                    <button type='button' onClick={() => handleAddEntry(btnId[1])}>Add More..</button>
 
                 </div>
                 <div className='pacInfo'>
                     <h2>Practical Experience</h2>
-                    {paData.map((input, index) => {
-                        return (
-                            <div key={index}>
-                                <input
-                                    type='text'
-                                    name='companyName'
-                                    placeholder='Company Name'
-                                    onChange={event => handlePaChange(index, event)}
-                                    value={input.companyName}
-                                />
-                                <input
-                                    type='text'
-                                    name='title'
-                                    placeholder='Position Title'
-                                    onChange={event => handlePaChange(index, event)}
-                                    value={input.title}
-                                />
-                                <input
-                                    type='text'
-                                    name='dateWorked'
-                                    placeholder='Time of Work'
-                                    onChange={event => handlePaChange(index, event)}
-                                    value={input.dateWorked}
-                                />
-                                <textarea
-                                    name="description"
-                                    placeholder='Description'
-                                    onChange={event => handlePaChange(index, event)}
-                                    value={input.description}
-                                />
-                                <button type='button' onClick={() => handleRemoveEd(index, btnId[2])}>Remove</button>
-                            </div>
-                        )
-                    })}
-                    <button type='button' onClick={() => handleAddEd(btnId[3])}>Add More..</button>
+                    {exRead()}
+                    <button type='button' onClick={() => handleAddEntry(btnId[3])}>Add More..</button>
                 </div>
                 <button className='submitBtn' disabled={disableSubmit}>Submit</button>
             </form>
