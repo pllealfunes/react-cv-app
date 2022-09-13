@@ -35,7 +35,7 @@ export default function Form() {
     };
 
 
-    const handlePaChange = (index, event) => {
+    const handleExChange = (index, event) => {
         const data = [...exData];
         data[index][event.target.name] = event.target.value;
         setExData(data);
@@ -102,27 +102,27 @@ export default function Form() {
                             type='text'
                             name='companyName'
                             placeholder='Company Name'
-                            onChange={event => handlePaChange(index, event)}
+                            onChange={event => handleExChange(index, event)}
                             value={input.companyName}
                         />
                         <input
                             type='text'
                             name='title'
                             placeholder='Position Title'
-                            onChange={event => handlePaChange(index, event)}
+                            onChange={event => handleExChange(index, event)}
                             value={input.title}
                         />
                         <input
                             type='text'
                             name='dateWorked'
                             placeholder='Time of Work'
-                            onChange={event => handlePaChange(index, event)}
+                            onChange={event => handleExChange(index, event)}
                             value={input.dateWorked}
                         />
                         <textarea
                             name="description"
                             placeholder='Description'
-                            onChange={event => handlePaChange(index, event)}
+                            onChange={event => handleExChange(index, event)}
                             value={input.description}
                         />
                         <button type='button' onClick={() => handleRemoveEd(index, btnId[2])}>Remove</button>
