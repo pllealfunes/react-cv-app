@@ -50,13 +50,13 @@ export default function Form() {
             };
             setEdData([...educationData, newEdInput]);
         } else if (id == 4) {
-            const newPaInput = {
+            const newExInput = {
                 companyName: "",
                 title: "",
                 dateWorked: "",
                 description: ""
             };
-            setExData([...exData, newPaInput]);
+            setExData([...exData, newExInput]);
         }
     };
 
@@ -86,7 +86,7 @@ export default function Form() {
                             onChange={event => handleEdChange(index, event)}
                             value={input.gradDate}
                         />
-                        <button type='button' onClick={() => handleRemoveEd(index, btnId[0])}>Remove</button>
+                        <button type='button' onClick={() => handleRemoveInput(index, btnId[0])}>Remove</button>
                     </div>
                 )
             })
@@ -125,14 +125,14 @@ export default function Form() {
                             onChange={event => handleExChange(index, event)}
                             value={input.description}
                         />
-                        <button type='button' onClick={() => handleRemoveEd(index, btnId[2])}>Remove</button>
+                        <button type='button' onClick={() => handleRemoveInput(index, btnId[2])}>Remove</button>
                     </div>
                 )
             })
         }
     }
 
-    const handleRemoveEd = (index, id) => {
+    const handleRemoveInput = (index, id) => {
         if (id == 1) {
             const educationEntry = [...educationData];
             educationEntry.splice(index, 1);
