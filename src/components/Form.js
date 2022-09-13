@@ -118,7 +118,9 @@ export default function Form() {
     }
 
     function editResume(e) {
-        //setGenData(results);
+        setGenData(results.basic);
+        setEdData(results.academic);
+        setPaData(results.experience);
         setDisableEdit(true);
         setDisableSubmit(false);
     }
