@@ -1,6 +1,14 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
 import Results from './Results';
+import Button from '@mui/material/Button';
+import DeleteIcon from '@mui/icons-material/Delete';
+import TextField from '@mui/material/TextField';
+import Box from '@mui/material/Box';
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import Divider from '@mui/material/Divider';
+import Grid from '@mui/material/Grid';
+
+
 
 export default function Form() {
 
@@ -42,14 +50,14 @@ export default function Form() {
     };
 
     const handleAddEntry = (id) => {
-        if (id == 2) {
+        if (id === 2) {
             const newEdInput = {
                 schoolName: "",
                 degree: "",
                 gradDate: ""
             };
             setEdData([...educationData, newEdInput]);
-        } else if (id == 4) {
+        } else if (id === 4) {
             const newExInput = {
                 companyName: "",
                 title: "",
@@ -61,84 +69,126 @@ export default function Form() {
     };
 
     const edRead = () => {
-        if (educationData.length != 0) {
+        if (educationData.length !== 0) {
             return educationData.map((input, index) => {
                 return (
-                    <div key={index}>
-                        <input
+                    <Box key={index}
+                        sx={{
+                            my: 3
+                        }}>
+                        <TextField
+                            fullWidth
+                            id='filled-basic'
+                            label='School Name'
+                            variant='filled'
+                            margin='dense'
                             type='text'
                             name='schoolName'
-                            placeholder='School Name'
                             onChange={event => handleEdChange(index, event)}
                             value={input.schoolName}
                         />
-                        <input
+                        <TextField
+                            fullWidth
+                            id='filled-basic'
+                            label='Title of Study'
+                            variant='filled'
+                            margin='dense'
                             type='text'
                             name='degree'
-                            placeholder='Title of Study'
                             onChange={event => handleEdChange(index, event)}
                             value={input.degree}
                         />
-                        <input
+                        <TextField
+                            fullWidth
+                            id='filled-basic'
+                            label='Date of Study'
+                            variant='filled'
+                            margin='dense'
                             type='text'
                             name='gradDate'
-                            placeholder='Date of Study'
                             onChange={event => handleEdChange(index, event)}
                             value={input.gradDate}
                         />
-                        <button type='button' onClick={() => handleRemoveInput(index, btnId[0])}>Remove</button>
-                    </div>
+                        <div>
+                            <Button variant="contained" color="error" size="small" startIcon={<DeleteIcon />} onClick={() => handleRemoveInput(index, btnId[0])}>Remove</Button>
+                        </div>
+                    </Box>
                 )
             })
         }
     }
 
     const exRead = () => {
-        if (exData.length != 0) {
+        if (exData.length !== 0) {
             return exData.map((input, index) => {
                 return (
-                    <div key={index}>
-                        <input
+                    <Box key={index}
+                        sx={{
+                            my: 3
+                        }}
+                    >
+                        <TextField
+                            fullWidth
+                            id='filled-basic'
+                            label='Company Name'
+                            variant='filled'
+                            margin='dense'
                             type='text'
                             name='companyName'
-                            placeholder='Company Name'
                             onChange={event => handleExChange(index, event)}
                             value={input.companyName}
                         />
-                        <input
+                        <TextField
+                            fullWidth
+                            id='filled-basic'
+                            label='Position Title'
+                            variant='filled'
+                            margin='dense'
                             type='text'
                             name='title'
-                            placeholder='Position Title'
                             onChange={event => handleExChange(index, event)}
                             value={input.title}
                         />
-                        <input
+                        <TextField
+                            fullWidth
+                            id='filled-basic'
+                            label='Time Worked'
+                            variant='filled'
+                            margin='dense'
                             type='text'
                             name='dateWorked'
-                            placeholder='Time of Work'
                             onChange={event => handleExChange(index, event)}
                             value={input.dateWorked}
                         />
-                        <textarea
+                        <TextField
+                            multiline
+                            fullWidth
+                            margin='normal'
+                            variant='outlined'
+                            rows={5}
+                            rowsMax={10}
                             name="description"
                             placeholder='Description'
+                            type='text'
                             onChange={event => handleExChange(index, event)}
                             value={input.description}
                         />
-                        <button type='button' onClick={() => handleRemoveInput(index, btnId[2])}>Remove</button>
-                    </div>
+                        <div>
+                            <Button variant="contained" color="error" size="small" startIcon={<DeleteIcon />} onClick={() => handleRemoveInput(index, btnId[2])}>Remove</Button>
+                        </div>
+                    </Box>
                 )
             })
         }
     }
 
     const handleRemoveInput = (index, id) => {
-        if (id == 1) {
+        if (id === 1) {
             const educationEntry = [...educationData];
             educationEntry.splice(index, 1);
             setEdData(educationEntry);
         }
-        else if (id == 3) {
+        else if (id === 3) {
             const exEntry = [...exData];
             exEntry.splice(index, 1);
             setExData(exEntry);
@@ -192,46 +242,77 @@ export default function Form() {
 
 
     return (
-        <div className='formContainer'>
-            <form onSubmit={handleSubmit}>
+        <Grid
+            className='formContainer'
+            container
+            direction="column"
+            justifyContent="center"
+            alignItems="center"
+        >
+            <Box component="form"
+                autoComplete="off"
+                sx={{
+                    '& > :not(style)': { m: 1, width: '25ch' },
+                    bgcolor: '#eeeeee',
+                    px: 15,
+                    py: 5,
+                    my: 5,
+                    boxShadow: 2,
+                    borderRadius: 2,
+                    '& button': { m: 1 },
+                }}
+                onSubmit={handleSubmit}>
                 <div className='genInfo'>
                     <h2>General Information</h2>
-                    <input
+                    <TextField
+                        fullWidth
+                        id='filled-basic'
+                        label='Full Name'
+                        variant='filled'
+                        margin='dense'
                         type='text'
                         name='fullName'
-                        placeholder='Full Name'
                         onChange={handleGenChange}
                         value={genData.fullName}
                     />
-                    <input
+                    <TextField
+                        fullWidth
+                        id='filled-basic'
+                        label='Email'
+                        variant='filled'
+                        margin='dense'
                         type='text'
                         name='email'
-                        placeholder='Email'
                         onChange={handleGenChange}
                         value={genData.email}
                     />
-                    <input
+                    <TextField
+                        fullWidth
+                        id='filled-basic'
+                        label='Phone'
+                        variant='filled'
+                        margin='dense'
                         type='tel'
-                        name='phone'
                         placeholder='Phone Number'
                         onChange={handleGenChange}
                         value={genData.phone}
                     />
                 </div>
+                <Divider variant="middle" />
                 <div className='edInfo'>
-                    <h2>Educational Experience</h2>
+                    <h2>Education</h2>
+                    <Button variant="contained" color="warning" size="small" startIcon={<AddCircleOutlineIcon />} onClick={() => handleAddEntry(btnId[1])}>ADD</Button>
                     {edRead()}
-                    <button type='button' onClick={() => handleAddEntry(btnId[1])}>Add More..</button>
-
                 </div>
+                <Divider variant="middle" />
                 <div className='pacInfo'>
-                    <h2>Practical Experience</h2>
+                    <h2>Experience</h2>
+                    <Button variant="contained" color="warning" size="small" startIcon={<AddCircleOutlineIcon />} onClick={() => handleAddEntry(btnId[3])}>Add</Button>
                     {exRead()}
-                    <button type='button' onClick={() => handleAddEntry(btnId[3])}>Add More..</button>
                 </div>
-                <button className='submitBtn' disabled={disableSubmit}>Submit</button>
-            </form>
+                <Button variant="contained" color="success" className='submitBtn' disabled={disableSubmit}>Submit</Button>
+            </Box>
             {isSubmitted && < Results results={results} editResume={editResume} disableEditBtn={disableEdit} />}
-        </div>
+        </Grid>
     );
 }

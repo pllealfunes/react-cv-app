@@ -1,5 +1,7 @@
 .App {
   text-align: center;
+  background: rgb(2, 119, 189);
+  background: radial-gradient(circle, rgba(2, 119, 189, 1) 43%, rgba(1, 87, 155, 1) 90%);
 }
 
 .App {
@@ -8,39 +10,6 @@
   align-items: center;
   flex-direction: row;
   flex-wrap: wrap;
-}
-
-.genInfo,
-.edInfo,
-.pacInfo,
-.geninfo-container,
-.edinfo-container,
-.pacinfo-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-
-.geninfo-container,
-.edinfo-container,
-.pacinfo-container {
-  margin: 1.5rem;
-}
-
-.submitBtn {
-  margin: 1rem;
-}
-
-.formContainer {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 20rem;
 }
 
 .descriptionResults {
