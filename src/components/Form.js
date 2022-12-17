@@ -166,7 +166,7 @@ export default function Form() {
                             margin='normal'
                             variant='outlined'
                             rows={5}
-                            rowsMax={10}
+                            rowsmax={10}
                             name="description"
                             placeholder='Description'
                             type='text'
@@ -249,7 +249,9 @@ export default function Form() {
             justifyContent="center"
             alignItems="center"
         >
-            <Box component="form"
+            <Box
+                component="form"
+                onClick={handleSubmit}
                 autoComplete="off"
                 sx={{
                     '& > :not(style)': { m: 1, width: '25ch' },
@@ -260,8 +262,7 @@ export default function Form() {
                     boxShadow: 2,
                     borderRadius: 2,
                     '& button': { m: 1 },
-                }}
-                onSubmit={handleSubmit}>
+                }}>
                 <div className='genInfo'>
                     <h2>General Information</h2>
                     <TextField
@@ -293,6 +294,7 @@ export default function Form() {
                         variant='filled'
                         margin='dense'
                         type='tel'
+                        name='phone'
                         placeholder='Phone Number'
                         onChange={handleGenChange}
                         value={genData.phone}
@@ -310,7 +312,7 @@ export default function Form() {
                     <Button variant="contained" color="warning" size="small" startIcon={<AddCircleOutlineIcon />} onClick={() => handleAddEntry(btnId[3])}>Add</Button>
                     {exRead()}
                 </div>
-                <Button variant="contained" color="success" className='submitBtn' disabled={disableSubmit}>Submit</Button>
+                <Button variant="contained" color="success" disabled={disableSubmit}>Submit</Button>
             </Box>
             {isSubmitted && < Results results={results} editResume={editResume} disableEditBtn={disableEdit} />}
         </Grid>

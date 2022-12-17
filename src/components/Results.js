@@ -1,6 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
-import Form from './Form';
 
 export default function Results(props) {
     return (
@@ -42,7 +40,7 @@ export default function Results(props) {
                                 <b>Company Name:</b> {experience.companyName}
                             </div>
                             <div>
-                                <b>Pposition Title:</b> {experience.title}
+                                <b>Position Title:</b> {experience.title}
                                 <b>Position Title:</b> {experience.title}
                             </div>
                             <div>
