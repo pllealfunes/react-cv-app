@@ -12,7 +12,7 @@ import Grid from '@mui/material/Grid';
 
 export default function Form() {
 
-    let btnId = [1, 2, 3, 4];
+    let btnId = [1, 2, 3, 4, 5];
 
     const [genData, setGenData] = React.useState({
         fullName: "",
@@ -68,7 +68,7 @@ export default function Form() {
         }
     };
 
-    const edRead = () => {
+    const EdRead = () => {
         if (educationData.length !== 0) {
             return educationData.map((input, index) => {
                 return (
@@ -110,15 +110,17 @@ export default function Form() {
                             value={input.gradDate}
                         />
                         <div>
-                            <Button variant="contained" color="error" size="small" startIcon={<DeleteIcon />} onClick={() => handleRemoveInput(index, btnId[0])}>Remove</Button>
+                            <Button onClick={() => handleRemoveInput(index, btnId[0])} variant="contained" type="button" color="error" size="small" startIcon={<DeleteIcon />}>Remove</Button>
                         </div>
                     </Box>
+
                 )
             })
         }
     }
 
-    const exRead = () => {
+
+    const ExRead = () => {
         if (exData.length !== 0) {
             return exData.map((input, index) => {
                 return (
@@ -174,7 +176,7 @@ export default function Form() {
                             value={input.description}
                         />
                         <div>
-                            <Button variant="contained" color="error" size="small" startIcon={<DeleteIcon />} onClick={() => handleRemoveInput(index, btnId[2])}>Remove</Button>
+                            <Button onClick={() => handleRemoveInput(index, btnId[2])} variant="contained" type="button" color="error" size="small" startIcon={<DeleteIcon />}>Remove</Button>
                         </div>
                     </Box>
                 )
@@ -250,9 +252,6 @@ export default function Form() {
             alignItems="center"
         >
             <Box
-                component="form"
-                onClick={handleSubmit}
-                autoComplete="off"
                 sx={{
                     '& > :not(style)': { m: 1, width: '25ch' },
                     bgcolor: '#eeeeee',
@@ -263,56 +262,61 @@ export default function Form() {
                     borderRadius: 2,
                     '& button': { m: 1 },
                 }}>
-                <div className='genInfo'>
-                    <h2>General Information</h2>
-                    <TextField
-                        fullWidth
-                        id='filled-basic'
-                        label='Full Name'
-                        variant='filled'
-                        margin='dense'
-                        type='text'
-                        name='fullName'
-                        onChange={handleGenChange}
-                        value={genData.fullName}
-                    />
-                    <TextField
-                        fullWidth
-                        id='filled-basic'
-                        label='Email'
-                        variant='filled'
-                        margin='dense'
-                        type='text'
-                        name='email'
-                        onChange={handleGenChange}
-                        value={genData.email}
-                    />
-                    <TextField
-                        fullWidth
-                        id='filled-basic'
-                        label='Phone'
-                        variant='filled'
-                        margin='dense'
-                        type='tel'
-                        name='phone'
-                        placeholder='Phone Number'
-                        onChange={handleGenChange}
-                        value={genData.phone}
-                    />
-                </div>
-                <Divider variant="middle" />
-                <div className='edInfo'>
-                    <h2>Education</h2>
-                    <Button variant="contained" color="warning" size="small" startIcon={<AddCircleOutlineIcon />} onClick={() => handleAddEntry(btnId[1])}>ADD</Button>
-                    {edRead()}
-                </div>
-                <Divider variant="middle" />
-                <div className='pacInfo'>
-                    <h2>Experience</h2>
-                    <Button variant="contained" color="warning" size="small" startIcon={<AddCircleOutlineIcon />} onClick={() => handleAddEntry(btnId[3])}>Add</Button>
-                    {exRead()}
-                </div>
-                <Button variant="contained" color="success" disabled={disableSubmit}>Submit</Button>
+                <form
+                    onSubmit={handleSubmit}
+                    autoComplete="off"
+                >
+                    <div className='genInfo'>
+                        <h2>General Information</h2>
+                        <TextField
+                            fullWidth
+                            id='filled-basic'
+                            label='Full Name'
+                            variant='filled'
+                            margin='dense'
+                            type='text'
+                            name='fullName'
+                            onChange={handleGenChange}
+                            value={genData.fullName}
+                        />
+                        <TextField
+                            fullWidth
+                            id='filled-basic'
+                            label='Email'
+                            variant='filled'
+                            margin='dense'
+                            type='text'
+                            name='email'
+                            onChange={handleGenChange}
+                            value={genData.email}
+                        />
+                        <TextField
+                            fullWidth
+                            id='filled-basic'
+                            label='Phone'
+                            variant='filled'
+                            margin='dense'
+                            type='tel'
+                            name='phone'
+                            placeholder='Phone Number'
+                            onChange={handleGenChange}
+                            value={genData.phone}
+                        />
+                    </div>
+                    <Divider variant="middle" />
+                    <div className='edInfo'>
+                        <h2>Education</h2>
+                        <Button type='button' onClick={() => handleAddEntry(btnId[1])} variant="contained" color="warning" size="small" startIcon={<AddCircleOutlineIcon />}>ADD</Button>
+                        <EdRead />
+                    </div>
+                    <Divider variant="middle" />
+                    <div className='pacInfo'>
+                        <h2>Experience</h2>
+                        <Button type="button" onClick={() => handleAddEntry(btnId[3])} variant="contained" color="warning" size="small" startIcon={<AddCircleOutlineIcon />}>ADD</Button>
+                        <ExRead />
+                    </div>
+                    <Button type="submit" disabled={disableSubmit}>Submit</Button>
+                </form>
             </Box>
             {isSubmitted && < Results results={results} editResume={editResume} disableEditBtn={disableEdit} />}
         </Grid>
