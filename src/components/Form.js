@@ -68,7 +68,7 @@ export default function Form() {
         }
     };
 
-    const EdRead = () => {
+    const edRead = () => {
         if (educationData.length !== 0) {
             return educationData.map((input, index) => {
                 return (
@@ -120,7 +120,7 @@ export default function Form() {
     }
 
 
-    const ExRead = () => {
+    const exRead = () => {
         if (exData.length !== 0) {
             return exData.map((input, index) => {
                 return (
@@ -307,13 +307,13 @@ export default function Form() {
                     <div className='edInfo'>
                         <h2>Education</h2>
                         <Button type='button' onClick={() => handleAddEntry(btnId[1])} variant="contained" color="warning" size="small" startIcon={<AddCircleOutlineIcon />}>ADD</Button>
-                        <EdRead />
+                        {edRead()}
                     </div>
                     <Divider variant="middle" />
                     <div className='pacInfo'>
                         <h2>Experience</h2>
                         <Button type="button" onClick={() => handleAddEntry(btnId[3])} variant="contained" color="warning" size="small" startIcon={<AddCircleOutlineIcon />}>ADD</Button>
-                        <ExRead />
+                        {exRead()}
                     </div>
                     <Button type="submit" disabled={disableSubmit}>Submit</Button>
                 </form>
